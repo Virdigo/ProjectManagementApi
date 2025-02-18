@@ -30,7 +30,8 @@ namespace ProjectManagementApi.Migrations
                 {
                     id_doljnosti = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Post = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Post = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,7 +143,7 @@ namespace ProjectManagementApi.Migrations
                     AuthorID = table.Column<int>(type: "int", nullable: false),
                     PerformerID = table.Column<int>(type: "int", nullable: false),
                     ProjectID = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Priority = table.Column<int>(type: "int", nullable: false)
                 },

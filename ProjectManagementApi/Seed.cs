@@ -31,10 +31,9 @@ namespace ProjectManagementApi
             {
                 var positions = new List<Doljnosti>
                 {
-                    new Doljnosti { Post = "Руководитель" },
-                    new Doljnosti { Post = "Менеджер проекта" },
-                    new Doljnosti { Post = "Сотрудник" },
-                    new Doljnosti { Post = "Business Analyst" }
+                    new Doljnosti {Post = "Руководитель", Password = "password1" },
+                    new Doljnosti {Post = "Менеджер проекта", Password = "password2" },
+                    new Doljnosti {Post = "Сотрудник", Password = "password3" }
                 };
 
                 _context.Doljnosti.AddRange(positions);

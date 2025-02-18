@@ -133,5 +133,35 @@ namespace ProjectManagementApi.Controllers
 
             return NoContent();
         }
+        [HttpPost("authenticate")]
+        [ProducesResponseType(200, Type = typeof(DoljnostiDto))]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(400)]
+        public IActionResult Authenticate([FromBody] DoljnostiDto loginDto)
+        {
+            // Проверяем, что данные пришли
+            if (loginDto == null)
+            {
+                Console.WriteLine("Ошибка: loginDto == null");
+                return BadRequest("Данные для входа не переданы.");
+            }
+
+            Console.WriteLine($"Попытка входа: Логин={loginDto.Post}, Пароль={loginDto.Password}");
+
+            // Проверяем наличие пользователя в базе данных
+            var user = _doljnostiRepository.GetDoljnostisList()
+                .FirstOrDefault(u => u.Post.Equals(loginDto.Post, StringComparison.OrdinalIgnoreCase)
+                                  && u.Password == loginDto.Password);
+
+            if (user == null)
+            {
+                Console.WriteLine("Ошибка: Пользователь не найден или неверный пароль.");
+                return Unauthorized(new { message = "Неверный логин или пароль" });
+            }
+
+            Console.WriteLine($"Успешный вход: Логин={user.Post}");
+            var userDto = _mapper.Map<DoljnostiDto>(user);
+            return Ok(userDto);
+        }
     }
 }

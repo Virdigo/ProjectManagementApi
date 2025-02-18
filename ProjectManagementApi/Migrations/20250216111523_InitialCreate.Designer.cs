@@ -12,7 +12,7 @@ using ProjectManagementApi.Data;
 namespace ProjectManagementApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250212110458_InitialCreate")]
+    [Migration("20250216111523_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -49,6 +49,10 @@ namespace ProjectManagementApi.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_doljnosti"));
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Post")
                         .IsRequired()
@@ -181,8 +185,9 @@ namespace ProjectManagementApi.Migrations
                     b.Property<int>("ProjectID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaskName")
                         .IsRequired()
